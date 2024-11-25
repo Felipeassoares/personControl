@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Cadastro de Pessoa</title>
+    </head>
+    <body>
+        <h:form>
+            <h:outputLabel value="Nome:" for="name" />
+            <h:inputText id="name" value="#{personBean.name}" required="true" />
+            <h:message for="name" />
+
+            <h:outputLabel value="Email:" for="email" />
+            <h:inputText id="email" value="#{personBean.email}" required="true" />
+            <h:message for="email" />
+
+            <h:outputLabel value="Telefone:" for="telephone" />
+            <h:inputText id="telephone" value="#{personBean.telephone}" required="true" />
+            <h:message for="telephone" />
+
+            <h:commandButton value="Salvar" action="#{personBean.save}" />
+        </h:form>
+    </body>
+</html>
