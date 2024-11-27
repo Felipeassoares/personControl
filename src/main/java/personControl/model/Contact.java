@@ -15,7 +15,6 @@ import javax.persistence.Table;
 @Table(name = "contact")
 public class Contact implements Serializable {
 
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,14 +22,17 @@ public class Contact implements Serializable {
 	@Column(name = "id_contact")
 	private Long id;
 
-	@Column(name = "type", nullable = false, length = 50)
-	private String type;
+	@Column(name = "nm_contact", length = 45, nullable = false)
+	private String name;
 
-	@Column(name = "value", nullable = false, length = 100)
-	private String value;
+	@Column(name = "nr_telephone", length = 45, nullable = false)
+	private String telephone;
+
+	@Column(name = "nm_email", length = 45, nullable = false)
+	private String email;
 
 	@ManyToOne
-	@JoinColumn(name = "id_person") // Chave estrangeira
+	@JoinColumn(name = "person_id", nullable = false)
 	private Person person;
 
 	// Getters e Setters
@@ -42,20 +44,28 @@ public class Contact implements Serializable {
 		this.id = id;
 	}
 
-	public String getType() {
-		return type;
+	public String getName() {
+		return name;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getValue() {
-		return value;
+	public String getTelephone() {
+		return telephone;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Person getPerson() {

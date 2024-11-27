@@ -2,6 +2,7 @@ package personControl.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,20 +11,31 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Address implements Serializable{
-
+public class Address implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(name = "nm_address", length = 500, nullable = false)
 	private String street;
+
+	@Column(name = "nr_address", length = 10, nullable = false)
+	private String number;
+
+	@Column(name = "nm_city", length = 20, nullable = false)
 	private String city;
+
+	@Column(name = "nm_state", length = 20, nullable = false)
 	private String state;
-	private String country; 
+
+	@Column(name = "nm_country", length = 20, nullable = false)
+	private String country;
 
 	@ManyToOne
-	@JoinColumn(name = "person_id")
+	@JoinColumn(name = "person_id", nullable = false)
 	private Person person;
 
 	// Getters e Setters

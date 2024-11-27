@@ -19,20 +19,19 @@ public class Document implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_document") 
+	@Column(name = "id_document")
 	private Long id;
 
-	@Column(name = "type", nullable = false, length = 50)
-	private String type;
-
-	@Column(name = "number", nullable = false, length = 20)
+	@Column(name = "nr_document", length = 45, nullable = false)
 	private String number;
 
+	@Column(name = "tp_document", length = 45, nullable = false)
+	private String type;
+
 	@ManyToOne
-	@JoinColumn(name = "id_person")
+	@JoinColumn(name = "person_id", nullable = false)
 	private Person person;
 
-	// Getters e Setters
 	public Long getId() {
 		return id;
 	}
@@ -41,20 +40,20 @@ public class Document implements Serializable {
 		this.id = id;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	public String getNumber() {
 		return number;
 	}
 
 	public void setNumber(String number) {
 		this.number = number;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public Person getPerson() {

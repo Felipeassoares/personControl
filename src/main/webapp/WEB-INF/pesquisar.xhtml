@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<head>
+    <title>Cadastro de Pessoa</title>
+</head>
+<body>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Nome:" for="name" />
+            <h:inputText id="name" value="#{personBean.person.name}" required="true" />
+            
+            <h:outputLabel value="Email:" for="email" />
+            <h:inputText id="email" value="#{personBean.person.email}" required="true" />
+            
+            <h:outputLabel value="Telefone:" for="telephone" />
+            <h:inputText id="telephone" value="#{personBean.person.telephone}" required="true" />
+        </h:panelGrid>
+        
+        <h:panelGroup>
+            <h3>Lista de Documentos</h3>
+            <h:dataTable value="#{personBean.person.documents}" var="document">
+                <h:column>
+                    <f:facet name="header">Tipo</f:facet>
+                    #{document.type}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Número</f:facet>
+                    #{document.number}
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Remover" action="#{personBean.removeDocument(document)}" />
+                </h:column>
+            </h:dataTable>
+            <h:commandButton value="Adicionar Documento" action="#{personBean.addDocument}" />
+        </h:panelGroup>
+        
+        <h:panelGroup>
+            <h3>Lista de Endereços</h3>
+            <!-- Similar structure to documents -->
+        </h:panelGroup>
+        
+        <h:panelGroup>
+            <h3>Lista de Contatos</h3>
+            <!-- Similar structure to documents -->
+        </h:panelGroup>
+        
+        <h:commandButton value="Salvar" action="#{personBean.save}" />
+    </h:form>
+</body>
+</html>
