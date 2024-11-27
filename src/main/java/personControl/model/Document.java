@@ -1,5 +1,7 @@
 package personControl.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,54 +13,55 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "document")
-public class Document {
+public class Document implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+	private static final long serialVersionUID = 1L;
 
-    @ManyToOne
-    @JoinColumn(name = "person_id", nullable = false)
-    private Person person;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_document") 
+	private Long id;
 
-    @Column(name = "nr_document", nullable = false, length = 45)
-    private String documentNumber;
+	@Column(name = "type", nullable = false, length = 50)
+	private String type;
 
-    @Column(name = "tp_document", nullable = false, length = 45)
-    private String documentType;
+	@Column(name = "number", nullable = false, length = 20)
+	private String number;
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
+	@ManyToOne
+	@JoinColumn(name = "id_person")
+	private Person person;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	// Getters e Setters
+	public Long getId() {
+		return id;
+	}
 
-    public Person getPerson() {
-        return person;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setPerson(Person person) {
-        this.person = person;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public String getDocumentNumber() {
-        return documentNumber;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    public void setDocumentNumber(String documentNumber) {
-        this.documentNumber = documentNumber;
-    }
+	public String getNumber() {
+		return number;
+	}
 
-    public String getDocumentType() {
-        return documentType;
-    }
+	public void setNumber(String number) {
+		this.number = number;
+	}
 
-    public void setDocumentType(String documentType) {
-        this.documentType = documentType;
-    }
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
 }
-

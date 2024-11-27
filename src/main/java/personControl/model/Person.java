@@ -1,5 +1,7 @@
 package personControl.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,97 +15,97 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "person")
-public class Person {
+public class Person implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+	private static final long serialVersionUID = 1L;
 
-    @Column(name = "nm_person", nullable = false, length = 200)
-    private String name;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_person")
+	private Long id;
 
-    @Column(name = "tp_person", nullable = false, length = 2)
-    private String type;
+	@Column(name = "name", nullable = false, length = 200)
+	private String name;
 
-    @Column(name = "nm_email", nullable = false, length = 200)
-    private String email;
+	@Column(name = "type", nullable = false, length = 2)
+	private String type;
 
-    @Column(name = "nr_telephone", nullable = false, length = 200)
-    private String telephone;
+	@Column(name = "email", nullable = false, length = 200)
+	private String email;
 
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Document> documents;
+	@Column(name = "telephone", length = 200)
+	private String telephone;
 
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Contact> contacts;
+	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Document> documents = new ArrayList<>();
 
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Address> addresses;
+	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Address> addresses = new ArrayList<>();
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
+	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Contact> contacts = new ArrayList<>();
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getTelephone() {
-        return telephone;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
+	public String getTelephone() {
+		return telephone;
+	}
 
-    public List<Document> getDocuments() {
-        return documents;
-    }
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
 
-    public void setDocuments(List<Document> documents) {
-        this.documents = documents;
-    }
+	public List<Document> getDocuments() {
+		return documents;
+	}
 
-    public List<Contact> getContacts() {
-        return contacts;
-    }
+	public void setDocuments(List<Document> documents) {
+		this.documents = documents;
+	}
 
-    public void setContacts(List<Contact> contacts) {
-        this.contacts = contacts;
-    }
+	public List<Address> getAddresses() {
+		return addresses;
+	}
 
-    public List<Address> getAddresses() {
-        return addresses;
-    }
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
+	}
 
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
-    }
+	public List<Contact> getContacts() {
+		return contacts;
+	}
+
+	public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
+	}
 }
-

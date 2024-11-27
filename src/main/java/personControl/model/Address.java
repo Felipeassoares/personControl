@@ -1,96 +1,77 @@
 package personControl.model;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "address")
-public class Address {
+public class Address implements Serializable{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "person_id", nullable = false)
-    private Person person;
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String street;
+	private String city;
+	private String state;
+	private String country; 
 
-    @Column(name = "nm_address", nullable = false, length = 500)
-    private String addressName;
+	@ManyToOne
+	@JoinColumn(name = "person_id")
+	private Person person;
 
-    @Column(name = "nr_address", nullable = false, length = 10)
-    private String addressNumber;
+	// Getters e Setters
+	public Long getId() {
+		return id;
+	}
 
-    @Column(name = "nm_city", nullable = false, length = 20)
-    private String city;
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    @Column(name = "nm_state", nullable = false, length = 20)
-    private String state;
+	public String getStreet() {
+		return street;
+	}
 
-    @Column(name = "nm_country", nullable = false, length = 20)
-    private String country;
+	public void setStreet(String street) {
+		this.street = street;
+	}
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
+	public String getCity() {
+		return city;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setCity(String city) {
+		this.city = city;
+	}
 
-    public Person getPerson() {
-        return person;
-    }
+	public String getState() {
+		return state;
+	}
 
-    public void setPerson(Person person) {
-        this.person = person;
-    }
+	public void setState(String state) {
+		this.state = state;
+	}
 
-    public String getAddressName() {
-        return addressName;
-    }
+	public String getCountry() {
+		return country;
+	}
 
-    public void setAddressName(String addressName) {
-        this.addressName = addressName;
-    }
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
-    public String getAddressNumber() {
-        return addressNumber;
-    }
+	public Person getPerson() {
+		return person;
+	}
 
-    public void setAddressNumber(String addressNumber) {
-        this.addressNumber = addressNumber;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
+	public void setPerson(Person person) {
+		this.person = person;
+	}
 }
