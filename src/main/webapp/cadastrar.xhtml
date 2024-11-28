@@ -1,36 +1,82 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-<head>
-    <title>Pesquisa de Pessoas</title>
-</head>
-<body>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Cadastro de Pessoa</title>
+</h:head>
+<h:body>
     <h:form>
         <h:panelGrid columns="2">
-            <h:outputLabel value="Nome:" for="searchName" />
-            <h:inputText id="searchName" value="#{personBean.searchName}" />
-            <h:commandButton value="Pesquisar" action="#{personBean.search}" />
+            <h:outputLabel value="Nome:" for="name" />
+            <h:inputText id="name" value="#{personBean.person.name}" required="true" />
+
+            <h:outputLabel value="Email:" for="email" />
+            <h:inputText id="email" value="#{personBean.person.email}" required="true" />
         </h:panelGrid>
-        
-        <h:dataTable value="#{personBean.personList}" var="person" border="1">
-            <h:column>
-                <f:facet name="header">Nome</f:facet>
-                #{person.name}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Email</f:facet>
-                #{person.email}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Telefone</f:facet>
-                #{person.telephone}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Ações</f:facet>
-                <h:commandButton value="Editar" action="#{personBean.edit(person)}" />
-                <h:commandButton value="Remover" action="#{personBean.remove(person)}" />
-            </h:column>
-        </h:dataTable>
+
+        <h3>Lista de Documentos</h3>
+        <p:dataTable value="#{personBean.person.documents}" var="document" editable="true">
+            <p:column headerText="Tipo">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{document.type}" /></f:facet>
+                    <f:facet name="input"><h:inputText value="#{document.type}" /></f:facet>
+                </p:cellEditor>
+            </p:column>
+            <p:column headerText="Número">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{document.number}" /></f:facet>
+                    <f:facet name="input"><h:inputText value="#{document.number}" /></f:facet>
+                </p:cellEditor>
+            </p:column>
+            <p:column>
+                <p:commandButton value="Remover" action="#{personBean.removeDocument(document)}" />
+            </p:column>
+        </p:dataTable>
+        <p:commandButton value="Adicionar Documento" action="#{personBean.addDocument}" />
+
+        <h3>Lista de Endereços</h3>
+        <p:dataTable value="#{personBean.person.addresses}" var="address" editable="true">
+            <p:column headerText="Endereço">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{address.street}" /></f:facet>
+                    <f:facet name="input"><h:inputText value="#{address.street}" /></f:facet>
+                </p:cellEditor>
+            </p:column>
+            <p:column headerText="Número">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{address.number}" /></f:facet>
+                    <f:facet name="input"><h:inputText value="#{address.number}" /></f:facet>
+                </p:cellEditor>
+            </p:column>
+            <p:column>
+                <p:commandButton value="Remover" action="#{personBean.removeAddress(address)}" />
+            </p:column>
+        </p:dataTable>
+        <p:commandButton value="Adicionar Endereço" action="#{personBean.addAddress}" />
+
+        <h3>Lista de Contatos</h3>
+        <p:dataTable value="#{personBean.person.contacts}" var="contact" editable="true">
+            <p:column headerText="Nome">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{contact.name}" /></f:facet>
+                    <f:facet name="input"><h:inputText value="#{contact.name}" /></f:facet>
+                </p:cellEditor>
+            </p:column>
+            <p:column headerText="Telefone">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{contact.phone}" /></f:facet>
+                    <f:facet name="input"><h:inputText value="#{contact.phone}" /></f:facet>
+                </p:cellEditor>
+            </p:column>
+            <p:column>
+                <p:commandButton value="Remover" action="#{personBean.removeContact(contact)}" />
+            </p:column>
+        </p:dataTable>
+        <p:commandButton value="Adicionar Contato" action="#{personBean.addContact}" />
+
+        <p:commandButton value="Salvar" action="#{personBean.save}" />
     </h:form>
-</body>
+</h:body>
 </html>
