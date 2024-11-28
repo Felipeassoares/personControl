@@ -1,102 +1,79 @@
 package personControl.service;
 
-import personControl.model.Person;
-import personControl.model.Address;
-import personControl.model.Document;
-import personControl.model.Contact;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
 import java.util.List;
+
+import personControl.dao.PersonDAO;
+import personControl.model.Address;
+import personControl.model.Contact;
+import personControl.model.Document;
+import personControl.model.Person;
 
 public class PersonService {
 
-	private EntityManager em;
+	private PersonDAO personDAO;
 
 	public PersonService() {
-		em = Persistence.createEntityManagerFactory("personControl").createEntityManager();
+		personDAO = new PersonDAO();
 	}
 
 	public void save(Person person) {
-		em.getTransaction().begin();
 		if (person.getId() == null) {
-			em.persist(person);
+			personDAO.save(person);
 		} else {
-			em.merge(person);
+			personDAO.update(person);
 		}
-		em.getTransaction().commit();
 	}
 
 	public void update(Person person) {
-		em.getTransaction().begin();
-		em.merge(person);
-		em.getTransaction().commit();
+		personDAO.update(person);
 	}
 
 	public void delete(Long id) {
 		Person person = findById(id);
 		if (person != null) {
-			em.getTransaction().begin();
-			em.remove(person);
-			em.getTransaction().commit();
+			personDAO.delete(person);
 		}
 	}
 
 	public Person findById(Long id) {
-		return em.find(Person.class, id);
+		return personDAO.findById(id);
 	}
 
 	public List<Person> findAll() {
-		TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
-		return query.getResultList();
+		return personDAO.findAll();
 	}
 
 	public List<Person> findByName(String name) {
-		TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.name LIKE :name", Person.class);
-		query.setParameter("name", "%" + name + "%");
-		return query.getResultList();
+		return personDAO.findByName(name);
 	}
 
 	public void addAddress(Person person, Address address) {
-		em.getTransaction().begin();
 		person.getAddresses().add(address);
-		em.merge(person);
-		em.getTransaction().commit();
+		personDAO.updateAssociations(person);
 	}
 
 	public void addDocument(Person person, Document document) {
-		em.getTransaction().begin();
 		person.getDocuments().add(document);
-		em.merge(person);
-		em.getTransaction().commit();
+		personDAO.updateAssociations(person);
 	}
 
 	public void addContact(Person person, Contact contact) {
-		em.getTransaction().begin();
 		person.getContacts().add(contact);
-		em.merge(person);
-		em.getTransaction().commit();
+		personDAO.updateAssociations(person);
 	}
 
 	public void removeAddress(Person person, Address address) {
-		em.getTransaction().begin();
 		person.getAddresses().remove(address);
-		em.merge(person);
-		em.getTransaction().commit();
+		personDAO.updateAssociations(person);
 	}
 
 	public void removeDocument(Person person, Document document) {
-		em.getTransaction().begin();
 		person.getDocuments().remove(document);
-		em.merge(person);
-		em.getTransaction().commit();
+		personDAO.updateAssociations(person);
 	}
 
 	public void removeContact(Person person, Contact contact) {
-		em.getTransaction().begin();
 		person.getContacts().remove(contact);
-		em.merge(person);
-		em.getTransaction().commit();
+		personDAO.updateAssociations(person);
 	}
 }

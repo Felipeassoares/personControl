@@ -1,15 +1,15 @@
 package personControl.controller;
 
-import personControl.model.Person;
-import personControl.model.Address;
-import personControl.model.Document;
-import personControl.model.Contact;
-import personControl.service.PersonService; 
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 
-import java.util.List;
+import personControl.model.Address;
+import personControl.model.Contact;
+import personControl.model.Document;
+import personControl.model.Person;
+import personControl.service.PersonService;
 
 @Named("bean")
 public class PersonBean {
@@ -49,15 +49,27 @@ public class PersonBean {
 	}
 
 	public void addAddress(Address address) {
-		person.getAddresses().add(address);
+		personService.addAddress(person, address);
 	}
 
 	public void addDocument(Document document) {
-		person.getDocuments().add(document);
+		personService.addDocument(person, document);
 	}
 
 	public void addContact(Contact contact) {
-		person.getContacts().add(contact); 
+		personService.addContact(person, contact);
+	}
+
+	public void removeAddress(Address address) {
+		personService.removeAddress(person, address);
+	}
+
+	public void removeDocument(Document document) {
+		personService.removeDocument(person, document);
+	}
+
+	public void removeContact(Contact contact) {
+		personService.removeContact(person, contact);
 	}
 
 	public Person getPerson() {
